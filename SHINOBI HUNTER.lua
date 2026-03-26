@@ -1,4 +1,10 @@
--- [[ 0. PERSISTENCE (QUEUE ON TELEPORT) ]]
+-- [[ 0. PERSISTENCE & ANTI‑DUPE ]]
+
+-- stop loading multiple times per server
+if _G.ShinobiHunterLoaded then
+    return
+end
+_G.ShinobiHunterLoaded = true
 
 -- try to get a queue_on_teleport function from common executors
 local queue_on_teleport = queue_on_teleport
@@ -9,17 +15,13 @@ local queue_on_teleport = queue_on_teleport
     or nil
 
 -- if supported, queue this same script to run in the next server
+-- !!! IMPORTANT: change this URL only if you change where you host the script
 if queue_on_teleport then
-    -- IMPORTANT: replace the loadstring(...) below with however you normally load this script
-    -- Example: if you execute it from a URL, put that same loadstring(game:HttpGet(...)) here.
     queue_on_teleport([[
+        _G.ShinobiHunterLoaded = nil
         loadstring(game:HttpGet("https://raw.githubusercontent.com/furankifujimoto-rgb/Bus/refs/heads/main/SHINOBI%20HUNTER.lua"))()
     ]])
 end
-
--- If you paste this whole file directly into your executor,
--- then instead of HttpGet, you can just paste the full script
--- again in the queued chunk (not recommended because very long).
 
 ----------------------------------------------------------------
 -- [[ 1. CONFIGURATION & SERVICES ]] --
@@ -226,4 +228,3 @@ task.spawn(function()
         task.wait(5)
     end
 end)
- 
