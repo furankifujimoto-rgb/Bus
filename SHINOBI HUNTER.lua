@@ -1,27 +1,16 @@
--- [[ 0. PERSISTENCE & ANTI‑DUPE ]]
+-- [[ 0. PERSISTENCE & ANTI‑DUPE FOR MADIUM ]]
 
--- stop loading multiple times per server
 if _G.ShinobiHunterLoaded then
     return
 end
 _G.ShinobiHunterLoaded = true
 
--- try to get a queue_on_teleport function from common executors
-local queue_on_teleport = queue_on_teleport
-    or queueteleport
-    or (syn and syn.queue_on_teleport)
-    or (fluxus and fluxus.queue_on_teleport)
-    or (KRNL_LOADED and queue_on_teleport)
-    or nil
-
--- if supported, queue this same script to run in the next server
--- !!! IMPORTANT: change this URL only if you change where you host the script
-if queue_on_teleport then
-    queue_on_teleport([[
-        _G.ShinobiHunterLoaded = nil
+-- On every server (including after hop), re‑run this script
+task.delay(0.8, function()
+    if not _G.ShinobiHunterLoaded then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/furankifujimoto-rgb/Bus/refs/heads/main/SHINOBI%20HUNTER.lua"))()
-    ]])
-end
+    end
+end)
 
 ----------------------------------------------------------------
 -- [[ 1. CONFIGURATION & SERVICES ]] --
