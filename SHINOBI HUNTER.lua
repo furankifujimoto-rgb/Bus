@@ -13,7 +13,7 @@ if queue_on_teleport then
     -- IMPORTANT: replace the loadstring(...) below with however you normally load this script
     -- Example: if you execute it from a URL, put that same loadstring(game:HttpGet(...)) here.
     queue_on_teleport([[
-        loadstring(game:HttpGet("https://yourdomain.com/yourshinobiscript.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/furankifujimoto-rgb/Bus/refs/heads/main/SHINOBI%20HUNTER.lua"))()
     ]])
 end
 
